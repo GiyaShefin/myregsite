@@ -1,0 +1,85 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block content %}
+
+<!--patient details-->
+<div class="container py-5">
+	<h1>Details of the patient</h1>
+	<form method="POST">
+		{% csrf_token %}
+		<div class="form-group">
+<input type="text" class="form-control" name="patientname" placeholder="Enter your name">
+
+        </div>
+
+		<div class="form-group">
+   <input type="number" class="form-control" name="age" placeholder="Enter your age">
+
+</div>
+		<div class="form-group">
+   <input type="date"  class="form-control" name="DOB" placeholder="Enter Date of birth">
+
+</div>
+		<div class="form-group">
+   <input type="text" class="form-control" name="Address" placeholder="Enter your address">
+
+</div>
+
+<select class="custom-select mb-4"
+        name="city"
+        hx-get="{% url 'patientdetails:towns' %}"
+        hx-trigger="change"
+        hx-target="#towns">
+
+    <option selected>Choose your city</option>
+    {% for city in cities %}
+        <option value="{{city.pk}}">{{ city.name }}</option>
+    {% endfor %}
+</select>
+<br>
+
+<div id="modules">
+    {% include 'partials/modules.html' %}
+</div>
+    </form></div>
+
+
+
+  <form action="/action_page.php">
+  <input type="checkbox" id="covishield" name="covishield" value="covishield">
+  <label for="covishield"> Covishield</label><br>
+  <input type="checkbox" id="covaccine" name="covaccine" value="covaccine">
+  <label for="covaccine"> covaccine</label><br>
+  <input type="checkbox" id="sputnik" name="sputnik" value="sputnik">
+  <label for="sputnik"> Sputnik</label><br><br>
+            <div class="form-check"></div></form>
+        <div class="form-check">
+
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    First Dose
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault2">
+Second Dose
+  </label>
+</div>
+</form>
+		<div>
+
+
+<form class="form-inline my-2 my-lg-0">
+
+    <a href="{% url 'patientdetail:success_page' %}" class="btn btn-success  ">submit details</a>
+</form>
+        </div> </form>
+</div>
+
+
+
+</div>
+
+{% endblock %}
